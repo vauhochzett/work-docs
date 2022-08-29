@@ -12,7 +12,8 @@ theme:
     logo: octicons/command-palette-24
   favicon: static/favicon.png
   palette:
-    accent: white
+    primary: white
+    accent: blue
   features:
     - navigation.tabs
     - toc.integrate
