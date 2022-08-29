@@ -1,4 +1,4 @@
-# Release history
+# Release History
 
 ## 0.99 (WIP): Getting a better view
 
