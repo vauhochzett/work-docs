@@ -31,13 +31,17 @@
 
 ## Installation
 
-The installation with [pipx](https://pypa.github.io/pipx/) is recommended. For that, simply run:
+Using [pipx](https://pypa.github.io/pipx/) for the installation is recommended:
 
 ```
 $ pipx install work-time-log
 ```
 
-Of course, installation with `pip` works just as well.
+Of course, installing with `pip` works as well:
+
+```
+$ pip install --user work-time-log
+```
 
 ## Getting Started
 
