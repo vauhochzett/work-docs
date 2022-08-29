@@ -14,8 +14,8 @@ This is a work-in-progress release. Currently released version: `0.99.2.post1` (
 
 - View entries grouped by their category.
 - Use cases:
-  + Quickly view categories used in the past in a compact form.
-  + Check how much work was done for a specific project (category), e.g. in the current week.
+	+ Quickly view categories used in the past in a compact form.
+	+ Check how much work was done for a specific project (category), e.g. in the current week.
 
 For example:
 
@@ -133,8 +133,8 @@ Tue, 22.02.: 1 record
 
 - `add`, `edit`, and `remove` now also support `--yesterday` / `-1` and `--day`
 - For `list`, `view`, and `export`:
-  + New `--since` selector equivalent to `--period X today`
-  + The `--month` selector now allows (optionally) passing a DATE, to select a month by one of its dates. E.g., `--month 1.1.` selects January of the current year.
+	+ New `--since` selector equivalent to `--period X today`
+	+ The `--month` selector now allows (optionally) passing a DATE, to select a month by one of its dates. E.g., `--month 1.1.` selects January of the current year.
 
 ### More robust `edit`ing
 
@@ -146,25 +146,25 @@ Tue, 22.02.: 1 record
 
 - `--day` no longer accepts ambiguous prefixes such as "s".
 - `--help`:
-  + Main program now has a "teaser message".
-  + Does not mention "protocol" any more.
+	+ Main program now has a "teaser message".
+	+ Does not mention "protocol" any more.
 - If an invalid state is detected but fixed by the user, the originally requested command is now retried automatically.
 - Output:
-  + `hours`: Both `--until` and `--target` / `-8` now print the projected balance at the assumed end time.
-  + When stopping or switching, the recorded run length will be printed out, e.g.: `Stopped work at 17:30 today (30 m recorded)`
-  + When an invalid state is detected, the user will no longer be offered to "abort"; instead use Ctrl-C.
-  + `config --path` now only prints the file path, enabling `subl (work config --path)`.
+	+ `hours`: Both `--until` and `--target` / `-8` now print the projected balance at the assumed end time.
+	+ When stopping or switching, the recorded run length will be printed out, e.g.: `Stopped work at 17:30 today (30 m recorded)`
+	+ When an invalid state is detected, the user will no longer be offered to "abort"; instead use Ctrl-C.
+	+ `config --path` now only prints the file path, enabling `subl (work config --path)`.
 - CLI:
-  + `switch`: The alias `pause` will be deprecated in an upcoming version; a warning is printed if it's used.
-  + `recess`: The primary name has been changed to `free-days`. The alias `recess` will remain as an option for now.
-  + The short flag for `--version` is now `-V`.
+	+ `switch`: The alias `pause` will be deprecated in an upcoming version; a warning is printed if it's used.
+	+ `recess`: The primary name has been changed to `free-days`. The alias `recess` will remain as an option for now.
+	+ The short flag for `--version` is now `-V`.
 - This version removes the migration code for the info file introduced in v0.94.
 
 ### Fixed bugs
 
 - `status`:
-  + Note "reduced hour day" no longer printed just because expected hours are less than 8.
-  + Note "work until" now incorporates start time of active run in calculation of end time.
+	+ Note "reduced hour day" no longer printed just because expected hours are less than 8.
+	+ Note "work until" now incorporates start time of active run in calculation of end time.
 - `switch`: Now checks if the switch time equals the start time of the active run (meaning the run would simply cancelled and immediately restarted at the same time) and prints a warning instead.
 - `edit`: Invalid changes no longer lead to deletion of the last edited record.
 
@@ -255,9 +255,9 @@ A new `--force` flag allows intentionally overriding some warnings:
 - `start --force`: Start even if a run is already active.
 - `resume --force`: Resume even if a new run was already started (undo `switch`).
 - `add --force`: Insert entries forcefully.
-  - If an entry is *subsumed*, remove and replace it.
-  - If an entry is *overlapped*, shorten it to make space.
-  - If an entry *contains* the forced entry, split it up and shorten the splits to make space in-between.
+	+ If an entry is *subsumed*, remove and replace it.
+	+ If an entry is *overlapped*, shorten it to make space.
+	+ If an entry *contains* the forced entry, split it up and shorten the splits to make space in-between.
 
 For example:
 
@@ -291,8 +291,8 @@ Fri, 28.05.: 3 records
 - `--include-active` now counts active run in total
 - `--only-time` now merges touching entries for output
 - `--with-breaks`:
-    + now shows breaks in separate lines
-    + now omits 0 minute breaks from the output.
+	+ now shows breaks in separate lines
+	+ now omits 0 minute breaks from the output.
 
 ### Changes
 
@@ -316,8 +316,8 @@ Final release version: `0.96.3`
 ### Expected hour management
 
 - New module `recess`
-  - Configure holidays, vacations, and days with reduced expected hours.
-  - The expected hours for the week and day will update accordingly.
+	+ Configure holidays, vacations, and days with reduced expected hours.
+	+ The expected hours for the week and day will update accordingly.
 
 For example:
 
@@ -364,8 +364,8 @@ Check your configuration with `work config --see "expected hours"`.
 - Output messages for `switch` are now more abstract and intuitive.
 -  `work config --expected` now prints the default configuration that is used by `work config --create`.
 - **Breaking**
-    + Old configuration files are now invalid, due to added (see above) and removed (see below) keys. Create a valid configuration file with `work config --create`.
-    + Autopause functionality removed, including the configuration option
+	+ Old configuration files are now invalid, due to added (see above) and removed (see below) keys. Create a valid configuration file with `work config --create`.
+	+ Autopause functionality removed, including the configuration option
 
 
 ## 0.95: export and CLI convenience
@@ -385,9 +385,9 @@ Check your configuration with `work config --see "expected hours"`.
 ## 0.94: New verification algorithm
 
 - Verification algorithm changed: Replaced MD5 hash with a much faster Adler-32 checksum.
-  - As the hash was only meant to protect against accidental edits, priorities were shifted to increase the speed.
-  - Relative speed improvement: About 20–50 % faster, more with growing size.
-  - Absolute improvement: About 1 ms for large sets of records (5 years * 200 days * 10 records).
+	+ As the hash was only meant to protect against accidental edits, priorities were shifted to increase the speed.
+	+ Relative speed improvement: About 20–50 % faster, more with growing size.
+	+ Absolute improvement: About 1 ms for large sets of records (5 years * 200 days * 10 records).
 - Empty folders for years and months in the records directory will be removed now.
 - This version removes the migration code introduced in v0.93. Make sure to migrate your records before updating.
 
@@ -406,12 +406,12 @@ Due to a bug in previous versions, not all entries were migrated from protocol v
 
 ## 0.92: switch
 
-New `switch` function
+- New `switch` function
 - The `pause` function was deprecated in favor of the new `switch` function.
 - The old functionality "stop at time A, restart at time B" has been preserved.
 - New: only one time argument can be passed.
-  - This enables a "switch in place" functionality.
-  - When a new task is started, this command suffices to save the completed work and immediately start a new task.
+	+ This enables a "switch in place" functionality.
+	+ When a new task is started, this command suffices to save the completed work and immediately start a new task.
 
 
 ## 0.9: Category and message
