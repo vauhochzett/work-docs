@@ -23,9 +23,7 @@ User-defined *aliases* and *macros* can now be added via the configuration, for 
 
 #### Aliases
 
-An *alias* is a *short name* for a mode, e.g. `ls` for `list`.
-
-Running `work --help` will print any configured aliases (shortened):
+An *alias* is a *short name for a mode*, e.g. `ls` for `list`. Running `work --help` will print any configured aliases (shortened):
 
 ```
 $ work --help
@@ -67,7 +65,7 @@ Inactive
 
 #### New file location
 
-- Location is now determined based on the [XDG Base Directory Specification](https://specifications.freedesktop.org/basedir-spec/basedir-spec-latest.html)
+- The location is now determined based on the [XDG Base Directory Specification](https://specifications.freedesktop.org/basedir-spec/basedir-spec-latest.html)
 - In short, the file is stored in `$XDG_CONFIG_HOME` if that is defined, otherwise in `$HOME/.config`
 - With that change, the file name has now also been changed from `.workrc` to `workrc`
 
