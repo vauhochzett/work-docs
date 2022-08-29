@@ -1,8 +1,9 @@
 # Release History
 
-## 0.99 (WIP): Getting a better view
 
-This is a work-in-progress release. Currently released version: `0.99.2.post1` (2022-06-28)
+## 0.99: Getting a better view
+
+Final release version: `0.99.2.post1` (2022-06-28)
 
 ### New mode `view`
 
