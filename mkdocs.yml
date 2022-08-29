@@ -1,4 +1,5 @@
 site_name: work
+site_url: https://vauhoch.zett.cc/work/
 
 nav:
   - Home: index.md
