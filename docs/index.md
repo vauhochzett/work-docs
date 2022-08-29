@@ -47,4 +47,7 @@ $ pip install --user work-time-log
 
 Find a list of example use cases on the page [Examples](examples.md).
 
-Furthermore, check out the help pages. `work --help` shows an overview, and `work <cmd> help` shows help for any sub-command.
+Furthermore, check out the help pages:
+
+- `work --help` shows an overview
+- `work <cmd> --help` shows help for any sub-command
