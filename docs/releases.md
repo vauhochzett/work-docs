@@ -1,5 +1,144 @@
 # Release History
 
+## 0.100: Aliases and macros
+
+Currently released version: `0.100.0` (2022-08-30)
+
+### Configurable aliases and macros
+
+User-defined *aliases* and *macros* can now be added via the configuration, for example:
+
+```json
+{
+	"aliases": {
+		"start":  ["1"],
+		"stop":   ["0"],
+		"status": ["s", "st"]
+	},
+	"macros": {
+		"s1": "status --oneline"
+	}
+}
+```
+
+#### Aliases
+
+An *alias* is a *short name* for a mode, e.g. `ls` for `list`.
+
+Running `work --help` will print any configured aliases (shortened):
+
+```
+$ work --help
+...
+
+modes:
+  {start, stop, add, status, list, ...}
+    start (1)           Start work
+    stop (0)            Stop work
+    ...
+    status (s, st)      Print the current status
+    ...
+
+```
+
+They can be used in place of the command they replace:
+
+```
+$ work 1
+Started work at 23:15 today
+```
+
+Note that the hardcoded aliases defined in previous versions were removed and insteadadded to the default configuration.
+
+By configuring custom aliases, the defaults are overwritten.
+
+#### Macros
+
+A *macro* is an *arbitrary expansion*, e.g. `vbw` is expanded to `view balance --week`. When used, it is replaced in the command line with the configured expansion before parsing the arguments, e.g.:
+
+```
+$ work s1
+Inactive
+```
+
+*Note: Macros and mode arguments cannot be combined. That means a macro must always include a mode in its expansion.*
+
+### User configuration
+
+#### New file location
+
+- Location is now determined based on the [XDG Base Directory Specification](https://specifications.freedesktop.org/basedir-spec/basedir-spec-latest.html)
+- In short, the file is stored in `$XDG_CONFIG_HOME` if that is defined, otherwise in `$HOME/.config`
+- With that change, the file name has now also been changed from `.workrc` to `workrc`
+
+#### Keys may now be left unset
+
+- Configuration keys can now be omitted
+- If left unset, the default value is used instead
+- To check the default values, use `config --default`
+
+*Note that for mappings (such as `"expected hours"`), only the complete mapping can be overwritten in the user configuration, not just a single key.*
+
+### Magic arguments to coerce rounding
+
+When using the keyword `now`, the current time is rounded either up or down, depending on the command.
+
+For example, assuming it is 12:10:
+```
+$ work start now
+Started work at 12:00 today  # rounded down
+```
+
+Now, the rounding can be influenced with the new keywords `now+`, `now-`, and `now!`. By using them one can force rounding up, down, or disable rounding respectively.
+
+Compare to above:
+
+```
+$ work start now!
+Started work at 12:10 today  # not rounded
+```
+
+### Improved listing of free days
+
+`free-days --list` has been made more useful.
+
+1. It now also prints the number of days in each category and in total
+2. Continuous periods in the output of vacation days are merged
+
+For example:
+
+```
+$ work free-days --list
+Holidays (2 days):
+  01.01.2022
+  10.01.2022
+
+Vacations (13 days):
+  10.02 – 11.02.2022 (2 days)
+  21.05 – 31.05.2022 (11 days)
+
+Total: 15 free days
+```
+
+### Changes
+
+- `config`:
+	+ Short flags `-c`, `-e`, and `-s` removed
+	+ Flag `--expected` renamed to `--default`
+	+ Flag `--create` removed (instead, use `work config --default > <file_path>`)
+	+ `--see` argument `"expected hours"` renamed to `expected-hours`
+- `--day` now excludes the current day when resolving the weekday
+- `--period` does not sort the provided start and end date anymore
+- Mode `day` removed (supplanted by macro functionality)
+- Improved messages in case of verification errors
+- One-time migration of configuration file
+- Brief "what's new" message after a version upgrade
+
+### Fixed bugs
+
+- `list --include-active` now layouts correctly if the log is empty, but a run is active
+- `hours` now prints `no active run` instead of `0 m active run` if no run is active
+
 
 ## 0.99: Getting a better view
 
