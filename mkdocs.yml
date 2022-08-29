@@ -1,3 +1,25 @@
 site_name: work
+
+nav:
+  - Home: index.md
+  - Examples: examples.md
+  - Release History: releases.md
+
 theme:
   name: material
+  icon:
+    logo: octicons/command-palette-24
+  favicon: static/favicon.png
+  palette:
+    accent: white
+  features:
+    - navigation.tabs
+    - toc.integrate
+
+markdown_extensions:
+  - pymdownx.emoji:
+      emoji_index: !!python/name:materialx.emoji.twemoji
+      emoji_generator: !!python/name:materialx.emoji.to_svg
+
+extra:
+  pypi-name: work-time-log
