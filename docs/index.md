@@ -13,7 +13,7 @@
 ## Key concepts
 
 1. Human-readable **text files for storage**. This makes it easy to track the log with `git` or perform manual edits.
-2. The tool **does not run continously** and instead only track the current status on disk.
+2. The tool **does not run continously** and instead maintains the current state on disk.
 3. **Global work status**, meaning any terminal can be used to check or update it.
 
 ## Features
@@ -34,13 +34,13 @@
 Using [pipx](https://pypa.github.io/pipx/) for the installation is recommended:
 
 ```
-$ pipx install work-time-log
+pipx install work-time-log
 ```
 
 Of course, installing with `pip` works as well:
 
 ```
-$ pip install --user work-time-log
+pip install --user work-time-log
 ```
 
 ## Getting Started
