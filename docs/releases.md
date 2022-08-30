@@ -23,7 +23,7 @@ User-defined *aliases* and *macros* can now be added via the configuration, for 
 
 #### Aliases
 
-An *alias* is a *short name for a mode*, e.g. `ls` for `list`. Running `work --help` will print any configured aliases (shortened):
+An *alias* is a *short name for a mode*, e.g. `ls` for `list`. Running `work --help` will show any configured aliases. For the example above, this would look as follows (shortened):
 
 ```
 $ work --help
@@ -46,16 +46,16 @@ $ work 1
 Started work at 23:15 today
 ```
 
-Note that the hardcoded aliases defined in previous versions were removed and insteadadded to the default configuration.
+Note that the hardcoded aliases defined in previous versions were removed and instead added to the default configuration.
 
-By configuring custom aliases, the defaults are overwritten.
+By configuring custom aliases, the defaults can be overwritten.
 
 #### Macros
 
-A *macro* is an *arbitrary expansion*, e.g. `vbw` is expanded to `view balance --week`. When used, it is replaced in the command line with the configured expansion before parsing the arguments, e.g.:
+A *macro* is an *arbitrary expansion*, e.g. `vbw` could be configured to mean `view balance --week`. When a macro is used, it is replaced in the command line with the configured expansion before parsing the arguments, e.g.:
 
 ```
-$ work s1
+$ work s1  # "s1" -> "status --oneline" (see above)
 Inactive
 ```
 
@@ -87,7 +87,7 @@ $ work start now
 Started work at 12:00 today  # rounded down
 ```
 
-Now, the rounding can be influenced with the new keywords `now+`, `now-`, and `now!`. By using them one can force rounding up, down, or disable rounding respectively.
+Now, the rounding can be influenced with the new keywords `now+`, `now-`, and `now!`. By using them, one can force rounding up, rounding down, or disable rounding, respectively.
 
 Compare to above:
 
@@ -100,8 +100,8 @@ Started work at 12:10 today  # not rounded
 
 `free-days --list` has been made more useful.
 
-1. It now also prints the number of days in each category and in total
-2. Continuous periods in the output of vacation days are merged
+1. Now also outputs the number of days in each category and in total.
+2. Continuous periods in the output of vacation days are merged.
 
 For example:
 
@@ -124,9 +124,9 @@ Total: 15 free days
 	+ Short flags `-c`, `-e`, and `-s` removed
 	+ Flag `--expected` renamed to `--default`
 	+ Flag `--create` removed (instead, use `work config --default > <file_path>`)
-	+ `--see` argument `"expected hours"` renamed to `expected-hours`
+	+ `--see` argument `expected hours` renamed to `expected-hours`
 - `--day` now excludes the current day when resolving the weekday
-- `--period` does not sort the provided start and end date anymore
+- `--period` no longer sorts the provided start and end date
 - Mode `day` removed (supplanted by macro functionality)
 - Improved messages in case of verification errors
 - One-time migration of configuration file
@@ -135,7 +135,7 @@ Total: 15 free days
 ### Fixed bugs
 
 - `list --include-active` now layouts correctly if the log is empty, but a run is active
-- `hours` now prints `no active run` instead of `0 m active run` if no run is active
+- `hours` now says `no active run` instead of `0 m active run` if no run is active
 
 
 ## 0.99: Getting a better view
