@@ -2,7 +2,12 @@
 
 ## 0.100: Aliases and macros
 
-Currently released version: `0.100.0` (2022-08-30)
+Currently released version: `0.100.1` (2022-08-31)
+
+### Breaking changes
+
+- Configuration file location changed (see *User configuration*)
+- Some command line flags of `config` removed (see *Other changes*)
 
 ### Configurable aliases and macros
 
@@ -59,7 +64,7 @@ $ work s1  # "s1" -> "status --oneline" (see above)
 Inactive
 ```
 
-*Note: Macros and mode arguments cannot be combined. That means a macro must always include a mode in its expansion.*
+*Note: Macros and the mode argument cannot be combined on the command line. E.g., `status s1` would be invalid. That means a macro must always include a mode in its expansion, as seen above.*
 
 ### User configuration
 
@@ -118,7 +123,7 @@ Vacations (13 days):
 Total: 15 free days
 ```
 
-### Changes
+### Other changes
 
 - `config`:
 	+ Short flags `-c`, `-e`, and `-s` removed
@@ -129,6 +134,7 @@ Total: 15 free days
 - `--period` no longer sorts the provided start and end date
 - Mode `day` removed (supplanted by macro functionality)
 - Improved messages in case of verification errors
+- All exceptions, including those raised before argument parsing, are now handled gracefully.
 - One-time migration of configuration file
 - Brief "what's new" message after a version upgrade
 
