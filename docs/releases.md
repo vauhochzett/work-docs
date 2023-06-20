@@ -2,7 +2,7 @@
 
 ## 0.100: Aliases and macros
 
-Currently released version: `0.100.2` (2023-03-20)
+Currently released version: `0.100.3` (2023-06-20)
 
 ### Breaking changes
 
@@ -143,6 +143,8 @@ Total: 15 free days
 - `list --include-active` now layouts correctly if the log is empty, but a run is active
 - `hours` now says `no active run` instead of `0 m active run` if no run is active
 - The plural form is now only used when a message refers to zero or multiple elements
+- `edit` now always sorts selected indices in ascending order before starting the edit
+- Fixes alias handling triggering a key error if no aliases have been configured
 
 
 ## 0.99: Getting a better view
