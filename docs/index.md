@@ -19,7 +19,7 @@
 ## Features
 
 - **Time tracking**
-    + Time track while working and (optionally) add a category and message.
+    + Track time while working and (optionally) add a category and message.
     + Retroactively add and modify any entry.
 - **Analyses**
     + Calculate and check the hours worked over arbitrary periods.
