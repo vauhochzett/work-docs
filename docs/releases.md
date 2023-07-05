@@ -2,7 +2,7 @@
 
 ## 0.100: Aliases and macros
 
-Currently released version: `0.100.3` (2023-06-20)
+Currently released version: `0.100.4` (2023-07-05)
 
 ### Breaking changes
 
@@ -135,7 +135,9 @@ Total: 15 free days
 - Mode `day` removed (supplanted by macro functionality).
 - Improved messages in case of verification errors.
 - All exceptions, including those raised before argument parsing, are now handled gracefully.
-- One-time migration of configuration file.
+- Migrations:
+	+ Moves configuration file to new location.
+	+ Converts existing files on Windows to UTF-8 encoding and `\n` line terminator.
 - Brief "what's new" message after a version upgrade.
 
 ### Fixed bugs
@@ -145,6 +147,12 @@ Total: 15 free days
 - The plural form is now only used when a message refers to zero or multiple elements.
 - `edit` now always sorts selected indices in ascending order before starting the edit.
 - Fixes alias handling triggering a key error if no aliases have been configured.
+- Fixes that if the log consisted of just one entry, and that entry was deleted, the integrity check would fail.
+
+### Internals
+
+- Files created on Windows are now encoded in UTF-8 and use the `\n` line terminator, as on Linux.
+- In debug mode, a separate flags state is now used. The configuration file is intentionally shared, though.
 
 
 ## 0.99: Getting a better view
