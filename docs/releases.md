@@ -126,25 +126,25 @@ Total: 15 free days
 ### Other changes
 
 - `config`:
-	+ Short flags `-c`, `-e`, and `-s` removed
-	+ Flag `--expected` renamed to `--default`
-	+ Flag `--create` removed (instead, use `work config --default > <file_path>`)
-	+ `--see` argument `expected hours` renamed to `expected-hours`
-- `--day` now excludes the current day when resolving the weekday
-- `--period` no longer sorts the provided start and end date
-- Mode `day` removed (supplanted by macro functionality)
-- Improved messages in case of verification errors
-- All exceptions, including those raised before argument parsing, are now handled gracefully
-- One-time migration of configuration file
-- Brief "what's new" message after a version upgrade
+	+ Short flags `-c`, `-e`, and `-s` removed.
+	+ Flag `--expected` renamed to `--default`.
+	+ Flag `--create` removed (instead, use `work config --default > <file_path>`).
+	+ `--see` argument `expected hours` renamed to `expected-hours`.
+- `--day` now excludes the current day when resolving the weekday.
+- `--period` no longer sorts the provided start and end date.
+- Mode `day` removed (supplanted by macro functionality).
+- Improved messages in case of verification errors.
+- All exceptions, including those raised before argument parsing, are now handled gracefully.
+- One-time migration of configuration file.
+- Brief "what's new" message after a version upgrade.
 
 ### Fixed bugs
 
-- `list --include-active` now layouts correctly if the log is empty, but a run is active
-- `hours` now says `no active run` instead of `0 m active run` if no run is active
-- The plural form is now only used when a message refers to zero or multiple elements
-- `edit` now always sorts selected indices in ascending order before starting the edit
-- Fixes alias handling triggering a key error if no aliases have been configured
+- `list --include-active` now layouts correctly if the log is empty, but a run is active.
+- `hours` now says `no active run` instead of `0 m active run` if no run is active.
+- The plural form is now only used when a message refers to zero or multiple elements.
+- `edit` now always sorts selected indices in ascending order before starting the edit.
+- Fixes alias handling triggering a key error if no aliases have been configured.
 
 
 ## 0.99: Getting a better view
