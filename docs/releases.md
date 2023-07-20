@@ -1,5 +1,151 @@
 # Release History
 
+## 0.101: Command-line comforts
+
+Currently released version: `0.101.0` (2023-07-20)
+
+### Breaking changes and deprecations
+
+- Filtering is now case insensitive by default (see *Smart case*).
+- Date selection flags `--date` and `-D` have been deprecated (see *Day names and dates...*).
+
+### Skip interactive selection (or select quicker)
+
+For `edit` and `remove`, users are presented a list of entries that allows them to interactively select what they want to edit or remove concretely. E.g.:
+
+```
+$ work edit -1  # edit yesterday's record
+Edit mode – Wednesday, 19.07.2023
+
+[0] 08:00 – 12:00 () "Various tasks"
+[1] 12:00 – 14:00 (project-B) "Lunch meeting"
+
+Enter nothing to cancel, or
+Enter one or more indices [0..1] separated by a space, or
+Enter "all" to edit all entries, or "last" for the last.
+
+Which entries? >
+```
+
+One small change can be seen immediately: the new keyword `"last"` allows easy selection of the last entry added that day.
+
+More importantly, though, two new flags were added to both `edit` and `remove`: `--all` and `--last`. They allow skipping the interactive selection completely.
+
+Now, remove all entries recorded on, e.g., Monday with just one command:
+
+```
+$ work remove --day mon --all
+Remove mode – Monday, 17.07.2023
+
+[0] 12:00 – 13:00 (project-A) ""
+
+Interactive selection skipped – selecting "all".
+Removed 1 record
+```
+
+Or, perhaps even more useful, directly edit the last record added today:
+
+```
+$ work edit --last
+Edit mode – Thursday, 20.07.2023
+
+[0] 12:00 – 14:00 () ""
+
+Interactive selection skipped – selecting "last".
+
+ > Selected record: 12:00 – 14:00 () ""
+
+New start time? (12:00)
+# ... etc.
+```
+
+### Filter with *smart case*
+
+Filtering used to be case sensitive. In most cases, though, we do not need case sensitivity. To preserve the option to use case sensitive search, while keeping the command line interface clean, `work` now employs *smart case* (popularized by [fd](https://github.com/sharkdp/fd)).
+
+In short:
+
+- If the search string is *fully lowercase*, filtering is *case insensitive*.
+- If it contains *at least one capital letter*, it will switch to *case sensitive* filtering.
+
+E.g.:
+
+```
+$ work ls --since 1.1. --Fm "meet*"
+Tue, 21.03.: 1 record
+11:30 – 12:30 | 1 h  (project-A) "Meeting"
+              = 1 h
+
+Mon, 22.05.: 2 records
+10:30 – 10:45 | 15 m  (project-A)       "meeting with josef"
+11:30 – 11:45 | 15 m  (project-B/task1) "Meet and Greet"
+              = 30 m
+
+Total: 3 records, 1 h 30 m worked
+
+$ work ls --since 1.1. --Fc "*[AC]*" --Fm "Meet*"
+Tue, 21.03.: 1 record
+11:30 – 12:30 | 1 h  (project-A) "Meeting"
+              = 1 h
+
+Total: 1 record, 1 h worked
+```
+
+Note that, as seen in examples above, filtering supports glob patterns such as `[AC]` matching either `"A"` or `"C"`, or `*` that matches everything. [Read more](https://docs.python.org/3/library/fnmatch.html)
+
+### Day names and dates can now be used interchangeably
+
+- The parsing of day names (e.g., "monday") and dates (e.g., "12.") were merged.
+- Most visible impact: the flags `-d/--date` and `-D/--day` have been merged into one (`-d/--day`).
+	+ The combined flag supports the combination of all valid inputs.
+	+ E.g., try `-d yesterday`, `-d tue`, or `-d 15.`.
+	+ The short flag `-D` and the long flag `--date` are deprecated and will be removed in a future release.
+- Small but impactful: Most date-dependent flags (e.g., `--period`, `--since`) now also support day names (previously understood only dates).
+	+ E.g., try `list --since sat` or `free-days --add-vacation mon wed`
+	+ For `--period` specifically, the variants can be mixed; e.g., `--period mon 5.` is now valid.
+
+### More robust handling of overlapping free days
+
+`free-days` now deals with overlaps more robustly. Two features were added:
+
+1. Adding a vacation now checks for configured non-working days and can remove them.
+2. Adding any free day now cancels if the chosen date already has a free day stored.
+
+#### Removing non-working days before adding a vacation
+
+In most cases, `work` will be configured to expect zero hours on weekends. Therefore, Saturday and Sunday will be considered "non-working days".
+
+When adding a vacation, though, the period may overlap with one of those non-working days. If `work` is used to track the number of taken vacation days, this is unwanted behavior, as weekends do not count towards the vacation day limit.
+
+Therefore, when adding a vacation and if it overlaps with non-working days, the user will be prompted and can choose to have them removed:
+
+```
+$ work free-days --add-vacation 31.12.22 5.1.
+The vacation overlaps with configured non-working day(s): 01.01.2023 (Sunday)
+Should non-working days be removed from the vacation before it is added?
+[Y/n] y
+Added vacation from 31.12.2022 to 05.01.2023
+```
+
+This is optional, as it may not always be intended.
+
+#### Preventing double entry of free days
+
+The three free day categories "vacation", "holidays", and "reduced hour days" are mutually exclusive by definition. To preempt user errors that require a manual fix, adding any type of free day on a date that already has a free day stored will now be prevented.
+
+### Other features
+
+- New flag `hours --for-balance` calculates the end time for a target balance; e.g. `h -b 2+` for 2 h overtime.
+
+### Fixed bugs
+
+- `view balance` now handles multi-year weeks correctly as single, continuous weeks.
+- `edit`
+	+ Does not allow entries to have 0 m length after editing any more.
+	+ The date is now not printed with an "on" before it any more.
+	+ Edited entries can no longer overlap the active run (the reverse was already impossible).
+
+
 ## 0.100: Aliases and macros
 
 Currently released version: `0.100.4` (2023-07-05)
