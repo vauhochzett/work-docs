@@ -1,5 +1,17 @@
 # Release History
 
+## 1.0: New name on PyPI and the (symbolic) "version 1"
+
+Currently released version: `1.0.0` (2023-07-21)
+
+Finally, you can `pipx install work`!
+
+Since Dan Colish, who owned the name `work` on PyPI, was so kind to transfer the name, the project has moved to this new name.
+It is recommended to do uninstall `work-time-log` and do a clean install – your user data survives reinstalls:
+
+- **If you used `pipx`**: `pipx uninstall work-time-log` and `pipx install work`
+- **If you used `pip`**: `pip uninstall work-time-log` and `pip install --user work`
+
 ## 0.101: Command-line comforts
 
 Currently released version: `0.101.1` (2023-07-21)
