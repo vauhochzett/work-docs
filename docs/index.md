@@ -6,7 +6,7 @@
 
 **Documentation**: this page
 
-**PyPI package**: [https://pypi.org/project/work-time-log/](https://pypi.org/project/work-time-log/)
+**PyPI package**: https://pypi.org/project/work/
 
 ---
 
@@ -34,13 +34,13 @@
 Using [pipx](https://pypa.github.io/pipx/) for the installation is recommended:
 
 ```
-pipx install work-time-log
+pipx install work
 ```
 
 Of course, installing with `pip` works as well:
 
 ```
-pip install --user work-time-log
+pip install --user work
 ```
 
 ## Getting Started

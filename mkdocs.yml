@@ -24,4 +24,4 @@ markdown_extensions:
       emoji_generator: !!python/name:materialx.emoji.to_svg
 
 extra:
-  pypi-name: work-time-log
+  pypi-name: work
