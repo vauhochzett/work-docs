@@ -14,7 +14,7 @@ It is recommended to do uninstall `work-time-log` and do a clean install – you
 
 ## 0.101: Command-line comforts
 
-Currently released version: `0.101.1` (2023-07-21)
+Final release version: `0.101.1` (2023-07-21)
 
 ### Breaking changes and deprecations
 
@@ -161,7 +161,7 @@ The three free day categories "vacation", "holidays", and "reduced hour days" ar
 
 ## 0.100: Aliases and macros
 
-Currently released version: `0.100.4` (2023-07-05)
+Final release version: `0.100.4` (2023-07-05)
 
 ### Breaking changes
 
