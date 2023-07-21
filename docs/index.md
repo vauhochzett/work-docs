@@ -6,7 +6,7 @@
 
 **Documentation**: this page
 
-**PyPI package**: https://pypi.org/project/work/
+**PyPI package**: <https://pypi.org/project/work/>
 
 ---
 
