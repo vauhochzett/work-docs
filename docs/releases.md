@@ -7,7 +7,7 @@ Currently released version: `1.0.0` (2023-07-21)
 Finally, you can `pipx install work`!
 
 Since Dan Colish, who owned the name `work` on PyPI, was so kind to transfer the name, the project has moved to this new name.
-It is recommended to do uninstall `work-time-log` and do a clean install – your user data survives reinstalls:
+It is recommended to uninstall `work-time-log` and do a clean install of `work` – your user data survives reinstalls:
 
 - **If you used `pipx`**: `pipx uninstall work-time-log` and `pipx install work`
 - **If you used `pip`**: `pip uninstall work-time-log` and `pip install --user work`
