@@ -2,7 +2,7 @@
 
 ## 0.101: Command-line comforts
 
-Currently released version: `0.101.0` (2023-07-20)
+Currently released version: `0.101.1` (2023-07-21)
 
 ### Breaking changes and deprecations
 
@@ -144,6 +144,7 @@ The three free day categories "vacation", "holidays", and "reduced hour days" ar
 	+ Does not allow entries to have 0 m length after editing any more.
 	+ The date is now not printed with an "on" before it any more.
 	+ Edited entries can no longer overlap the active run (the reverse was already impossible).
+- Time parsing now detects the mode correctly also if an alias is used.
 
 
 ## 0.100: Aliases and macros
