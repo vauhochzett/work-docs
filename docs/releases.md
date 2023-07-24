@@ -103,31 +103,31 @@ Tue, 21.03.: 1 record
 Total: 1 record, 1 h worked
 ```
 
-Note that, as seen in examples above, filtering supports glob patterns such as `[AC]` matching either `"A"` or `"C"`, or `*` that matches everything. [Read more](https://docs.python.org/3/library/fnmatch.html)
+Note that, as seen in the examples above, filtering supports glob patterns such as `[AC]` matching either `"A"` or `"C"`, or `*` that matches everything. [Read more](https://docs.python.org/3/library/fnmatch.html)
 
 ### Day names and dates can now be used interchangeably
 
 - The parsing of day names (e.g., "monday") and dates (e.g., "12.") were merged.
 - Most visible impact: the flags `-d/--date` and `-D/--day` have been merged into one (`-d/--day`).
 	+ The combined flag supports the combination of all valid inputs.
-	+ E.g., try `-d yesterday`, `-d tue`, or `-d 15.`.
+	+ E.g., try `--date yesterday`, `-d tue`, or `-d 15.`.
 	+ The short flag `-D` and the long flag `--date` are deprecated and will be removed in a future release.
-- Small but impactful: Most date-dependent flags (e.g., `--period`, `--since`) now also support day names (previously understood only dates).
+- Small but impactful effect: Most date-dependent flags (e.g., `--period`, `--since`) that previously understood only dates now also support day names.
 	+ E.g., try `list --since sat` or `free-days --add-vacation mon wed`
-	+ For `--period` specifically, the variants can be mixed; e.g., `--period mon 5.` is now valid.
+	+ Day names and dates can be mixed; e.g., `--period mon 5.` works.
 
 ### More robust handling of overlapping free days
 
 `free-days` now deals with overlaps more robustly. Two features were added:
 
-1. Adding a vacation now checks for configured non-working days and can remove them.
+1. Adding a vacation now checks for configured non-working days and can remove those dates from the added vacation.
 2. Adding any free day now cancels if the chosen date already has a free day stored.
 
 #### Removing non-working days before adding a vacation
 
-In most cases, `work` will be configured to expect zero hours on weekends. Therefore, Saturday and Sunday will be considered "non-working days".
+In most cases, the configuration of "expected hours" will be set to expect no work on weekends. Therefore, Saturday and Sunday will be considered "non-working days".
 
-When adding a vacation, though, the period may overlap with one of those non-working days. If `work` is used to track the number of taken vacation days, this is unwanted behavior, as weekends do not count towards the vacation day limit.
+When adding a vacation that is longer than a week, though, the vacation period will overlap with a weekend. If `work` is used to track the number of taken vacation days, this is unwanted behavior, as weekends do not count towards the vacation day limit.
 
 Therefore, when adding a vacation and if it overlaps with non-working days, the user will be prompted and can choose to have them removed:
 
@@ -139,7 +139,7 @@ Should non-working days be removed from the vacation before it is added?
 Added vacation from 31.12.2022 to 05.01.2023
 ```
 
-This is optional, as it may not always be intended.
+This is optional, as the behavior may not always be intended.
 
 #### Preventing double entry of free days
 
