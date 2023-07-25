@@ -2,7 +2,7 @@
 
 ## 1.0: New name on PyPI and the (symbolic) "version 1"
 
-Currently released version: `1.0.0` (2023-07-21)
+Currently released version: `1.0.1` (2023-07-25)
 
 Finally, you can `pipx install work`!
 
@@ -11,6 +11,12 @@ It is recommended to uninstall `work-time-log` and do a clean install of `work` 
 
 - **If you used `pipx`**: `pipx uninstall work-time-log` and `pipx install work`
 - **If you used `pip`**: `pip uninstall work-time-log` and `pip install --user work`
+
+### Fixed bugs
+
+- `stop`
+	+ If the stopping time equals the active start, the run is now again cancelled.
+	+ The run length that *would* be recorded is now correctly printed for dry runs.
 
 ## 0.101: Command-line comforts
 
