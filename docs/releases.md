@@ -2,7 +2,7 @@
 
 ## 1.0: New name on PyPI and the (symbolic) "version 1"
 
-Currently released version: `1.0.1` (2023-07-25)
+Currently released version: `1.0.3` (2023-08-23)
 
 Finally, you can `pipx install work`!
 
@@ -17,6 +17,7 @@ It is recommended to uninstall `work-time-log` and do a clean install of `work` 
 - `stop`
 	+ If the stopping time equals the active start, the run is now again cancelled.
 	+ The run length that *would* be recorded is now correctly printed for dry runs.
+- `list --include-active`: Now detects if the listed active run would overlap a stored entry and prints an appropriate error message.
 
 ## 0.101: Command-line comforts
 
