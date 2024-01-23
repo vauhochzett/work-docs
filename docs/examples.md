@@ -68,40 +68,40 @@ For that, we can do one of the following:
 
 1. `work status` checks *if a run is currently active* and additionally *informs us about our workday* (expected hours, week balance).
 
-```
-$ date                                            # assume it is 11:38
-Wed, 22. Jun 2022, 11:38:20 CEST
+    ```
+    $ date                                            # assume it is 11:38
+    Wed, 22. Jun 2022, 11:38:20 CEST
 
-$ work status                                     # check work status (at 11:38)
-Active since 10:45 today (0 h 53 m)
-> 1 h 23 m worked until now – 1 entry on record   # includes log entries + active run
-> Last entry ends at 10:30                        # last entry stored in log
+    $ work status                                     # check work status (at 11:38)
+    Active since 10:45 today (0 h 53 m)
+    > 1 h 23 m worked until now – 1 entry on record   # includes log entries + active run
+    > Last entry ends at 10:30                        # last entry stored in log
 
-Workday status:
-  6 h 7 m left (until 17:45)                     # time to complete expected hours
-  Week balance: On time
-```
+    Workday status:
+      6 h 7 m left (until 17:45)                     # time to complete expected hours
+      Week balance: On time
+    ```
 
 2. `work list --include-active` (alias `ls`) lists logged entries but *includes the active run*.
 
-```
-$ work ls --include-active
-Wed, 22.06.: 1 records (+ active run)
-10:00 – 10:30 | 30 m     (project) "Discussion with colleague"
-10:45 ~       | 0 h 53 m
-              = 1 h 23 m
-```
+    ```
+    $ work ls --include-active
+    Wed, 22.06.: 1 records (+ active run)
+    10:00 – 10:30 | 30 m     (project) "Discussion with colleague"
+    10:45 ~       | 0 h 53 m
+                  = 1 h 23 m
+    ```
 
 3. Finally, we can use the special short-hand `work day`, which is equivalent to `work list --include-active --with-breaks --list-empty`.
 
-```
-$ work day
-Wed, 22.06.: 1 records (+ active run)
-10:00 – 10:30 | 30 m     (project) "Discussion with colleague"
-              ~ 15 m break
-10:45 ~       | 0 h 53 m
-              = 1 h 23 m (+ 15 m of breaks)
-```
+    ```
+    $ work day
+    Wed, 22.06.: 1 records (+ active run)
+    10:00 – 10:30 | 30 m     (project) "Discussion with colleague"
+                  ~ 15 m break
+    10:45 ~       | 0 h 53 m
+                  = 1 h 23 m (+ 15 m of breaks)
+    ```
 
 ## Analysis and modification
 
