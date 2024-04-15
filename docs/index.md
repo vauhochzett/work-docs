@@ -31,7 +31,7 @@
 
 ## Installation
 
-Using [pipx](https://pypa.github.io/pipx/) for the installation is recommended:
+Using [pipx](https://pipx.pypa.io/) for the installation is recommended:
 
 ```
 pipx install work
