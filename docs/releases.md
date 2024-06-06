@@ -1,8 +1,123 @@
 # Release History
 
+## 1.1: Late night work support
+
+Currently released version: `1.1.0` (2024-06-06)
+
+### Breaking changes and deprecations
+
+- Flag aliases `--date` and `-D` have been removed. Instead, use `--day` or `-d`.
+- Migrations from versions < `0.100` have been removed.
+
+### Runs and entries that cover midnight or extend beyond it
+
+The headline feature of this release is that runs and entries can now end on midnight or extend beyond it (multi-day runs).
+This concerns most features and leads to various changes, as described below.
+
+#### Migration
+
+Previously, entries could not end at midnight, only at 23:59 or earlier.
+If you worked around this bug by saving entries with an end time of, e.g., 23:59 that actually ended at 24:00, you can make use of the automatic migration.
+
+On first start, you will be offered to optionally migrate existing records.
+Follow the interactive prompt to move the end time of all entries ending on or after a specified time to 24:00.
+E.g., an entry `22:00 – 23:59` can be extended to midnight: `22:00 – 24:00`.
+
+#### The active run can now extend beyond midnight
+
+An active run started on the previous day is now not considered an invalid state any more.
+Meaning, `status`, `list`, and `stop` work as expected:
+
+```
+$ work status  # assuming the current time is 02:13
+Active since 22:00 yesterday (4 h 13 m)
+> 4 h 13 m worked until now – nothing on record
+
+Workweek status:
+	Done (0 h 11 m over)
+
+$ work list --since yesterday --include-active  # list yesterday and today, including the active run
+Tue, 04.06.: 0 records (+ active run)
+22:00 – 24:00 | 2 h  # this virtual "entry" will be highlighted in blue, as it's the active run
+              = 2 h
+
+Wed, 05.06.: 0 records (+ active run)
+00:00 ~       | 02 h 13 m  # second part of the virtual "entry" for the active run
+              = 02 h 13 m
+
+Total: 2 records (+ active run), 4 h 13 m worked
+
+$ work stop now-  # stop now, but round down
+Stopped work at 02:00 today (4 h recorded)
+
+$ work list -s y  # short-hand for --since yesterday
+Tue, 04.06.: 1 records
+22:00 – 24:00 | 2 h
+              = 2 h
+
+Wed, 05.06.: 1 records
+00:00 – 02:00 | 2 h
+              = 2 h
+
+Total: 2 records, 4 h worked
+```
+
+Note that the *lingering run* heuristic (a check if a run that started the previous day was "forgotten") has been reworked.
+It now triggers only if a run started on the previous day gets longer than 8 hours.
+
+#### Log entries ending on midnight or extending beyond it
+
+To allow `stop`ping at midnight or adding an entry that touches midnight, `24:00` is now understood and parsed correctly:
+
+```
+$ work status  # assume it is 23:50
+Active since 22:00 (1 h 50 m)
+> 7 h 50 m worked until now – 2 entries on record
+> Last entry ends at 22:00
+# [...]
+
+$ work stop 24:00
+Stopped work at 00:00 tomorrow (2 h recorded)  # let me know if you want this to read "24:00 today" ;)
+```
+
+When `add`ing entries, you can now also enter multi-day entries (extending beyond midnight).
+E.g., to add a run from 22:00 yesterday to 02:30 today:
+
+```
+$ work add -1 22 26:30
+Added a record from 22:00 yesterday to 02:30 today
+```
+
+You may enter any "hour" up to `29`. These are considered as relative to the start time (as is common in Japan), so `25:05` represents `01:05` on the following day.
+
+Note that, when `edit`ing, you may only enter `24:00` as an end time – but no later time.
+
+### Even more robust handling of overlapping free days
+
+`free-days` now deals with overlaps in all scenarios when adding a vacation.
+
+1. Also checks for configured holidays and offers to remove those dates from the added vacation, just like non-working days (see [release notes of `0.101`](#more-robust-handling-of-overlapping-free-days)).
+2. If the vacation overlaps a reduced hour day, a clear error is printed before exiting.
+
+### Other features
+
+- You can now force stopping with `stop --force` and `switch --force` if the added entry would overlap a stored one.
+- More human-readable error messages
+	+ Errors raised when trying to add overlapping entries will now always be nicely formatted, even in corner cases.
+	+ `list` now detects if the active run overlaps with a stored entry and prints an according error message.
+
+### Fixed bugs
+
+- `edit` now behaves as expected in dry run mode: by not performing any modifications to the log.
+
+### Internals
+
+- Debug switches are now set with environment variables.
+
+
 ## 1.0: New name on PyPI and the (symbolic) "version 1"
 
-Currently released version: `1.0.3` (2023-08-23)
+Final release version: `1.0.3` (2023-08-23)
 
 Finally, you can `pipx install work`!
 
